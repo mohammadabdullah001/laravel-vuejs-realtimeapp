@@ -17,11 +17,12 @@ class CreateRepliesTable extends Migration
             $table->bigIncrements('id');
             $table->text('body');
 
-            $table->integer('question_id')->unsigned();
+            $table->unsignedBigInteger('question_id');
 
             $table->integer('user_id')->unsigned();
 
-            $table->foreign('question_id')->references('id')->on('question')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -34,5 +35,9 @@ class CreateRepliesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('replies');
+        Schema::table('replies', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+        Schema::enableForeignKeyConstraints();
     }
 }
