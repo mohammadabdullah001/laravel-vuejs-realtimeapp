@@ -7,6 +7,8 @@
     <v-btn text>FORUM</v-btn>
     <v-btn text>ASK QUESTION</v-btn>
     <v-btn text>CATEGORY</v-btn>
-    <v-btn text>LOGIN</v-btn>
+    <router-link to="/login">
+      <v-btn text>LOGIN</v-btn>
+    </router-link>
   </v-toolbar>
 </template>
