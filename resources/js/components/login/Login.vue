@@ -7,7 +7,10 @@
 
           <v-text-field v-model="form.password" type="password" label="Password" required></v-text-field>
 
-          <v-btn type="submit" color="green">submit</v-btn>
+          <v-btn type="submit" color="green">Login</v-btn>
+          <router-link to="/signup">
+            <v-btn color="blue">Sign Up</v-btn>
+          </router-link>
         </v-form>
       </v-col>
     </v-row>
@@ -23,9 +26,15 @@ export default {
       }
     };
   },
+  created() {
+    if (User.loggedIn()) {
+      this.$router.push({ name: "forum" });
+    }
+  },
   methods: {
     login() {
       User.login(this.form);
+      
     }
   }
 };
