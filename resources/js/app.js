@@ -13,6 +13,9 @@ import router from "./router/router";
 import User from "./helpers/User";
 window.User = User;
 Vue.use(Vuetify);
+
+import VueSimplemde from "vue-simplemde";
+
 const opts = {};
 
 export default new Vuetify(opts);
@@ -27,7 +30,9 @@ window.EventBuss = new Vue();
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
+Vue.component("vue-simplemde", VueSimplemde);
+import md from "marked";
+window.md = md;
 Vue.component("AppHome", require("./components/AppHome.vue").default);
 // Vue.component(
 //     "example-component",

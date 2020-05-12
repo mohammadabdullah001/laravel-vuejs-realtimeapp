@@ -3,15 +3,11 @@
     <v-toolbar-title>Bitfume</v-toolbar-title>
 
     <v-spacer></v-spacer>
-
-    <router-link
-      v-for="navlink in navlinks"
-      :key="navlink.title"
-      :to="navlink.to"
-      v-if="navlink.show"
-    >
-      <v-btn text>{{ navlink.title }}</v-btn>
-    </router-link>
+    <div v-for="navlink in navlinks" :key="navlink.title">
+      <router-link :to="navlink.to" v-if="navlink.show">
+        <v-btn text>{{ navlink.title }}</v-btn>
+      </router-link>
+    </div>
   </v-toolbar>
 </template>
 
@@ -21,7 +17,7 @@ export default {
     return {
       navlinks: [
         { title: "FORUM", to: "/forum", show: true },
-        { title: "ASK QUESTION", to: "/forum", show: User.loggedIn() },
+        { title: "ASK QUESTION", to: "/ask", show: User.loggedIn() },
         { title: "CATEGORY", to: "/forum", show: User.loggedIn() },
         { title: "LOGIN", to: "/login", show: !User.loggedIn() },
         { title: "Logout", to: "/logout", show: User.loggedIn() }
@@ -36,5 +32,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+a {
+  text-decoration: none;
+}
 </style>
