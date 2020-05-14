@@ -52,7 +52,7 @@ export default {
   methods: {
     signup() {
       axios
-        .post("/api/auth/signup", this.form)
+        .post("/auth/signup", this.form)
         .then(res => {
           User.responseAfterLogin(res);
         })

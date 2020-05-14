@@ -3,6 +3,8 @@
     <editQuestion v-if="editting" :question="question"></editQuestion>
     <div v-else>
       <SingleQuestion v-if="question" :question="question" class="mt-2 mb-2"></SingleQuestion>
+      <replies v-if="question" :question="question"></replies>
+      <createReply v-if="question" :questionSlug="question.slug"></createReply>
     </div>
   </div>
 </template>
@@ -10,6 +12,8 @@
 <script>
 import SingleQuestion from "./SingleQuestion";
 import editQuestion from "./editQuestion";
+import replies from "../reply/replies.vue";
+import createReply from "../reply/createReply.vue";
 export default {
   data: () => {
     return {
@@ -19,7 +23,9 @@ export default {
   },
   components: {
     SingleQuestion,
-    editQuestion
+    editQuestion,
+    replies,
+    createReply
   },
   created() {
     this.listen();
@@ -36,7 +42,7 @@ export default {
     },
     getQuestions() {
       axios
-        .get(`/api/question/${this.$route.params.slug}`)
+        .get(`/question/${this.$route.params.slug}`)
         .then(res => (this.question = res.data.data))
         .catch(errors => console.log(errors));
     }

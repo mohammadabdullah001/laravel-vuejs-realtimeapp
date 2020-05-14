@@ -4,7 +4,7 @@
       <v-card-title>
         {{ question.title }}
         <v-spacer></v-spacer>
-        <v-btn color="success">5 Replaye</v-btn>
+        <v-btn color="success">{{ question.replies_count }} Replaye</v-btn>
       </v-card-title>
       <v-card-subtitle class="grey--text">{{ question.user }} by {{ question.created_at }}</v-card-subtitle>
       <v-card-text v-html="body"></v-card-text>
@@ -36,7 +36,7 @@ export default {
   methods: {
     destroy() {
       axios
-        .delete(`/api/question/${this.question.slug}`)
+        .delete(`/question/${this.question.slug}`)
         .then(res => this.$router.push("/forum"))
         .catch(errors => console.log(errors));
     },

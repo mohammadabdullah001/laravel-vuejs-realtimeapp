@@ -10,7 +10,7 @@
         ></questions>
       </v-col>
       <v-col cols="4">
-        <h1>sidebar</h1>
+        <appSidebar></appSidebar>
       </v-col>
     </v-row>
   </v-container>
@@ -18,6 +18,7 @@
 
 <script>
 import questions from "./Questions.vue";
+import appSidebar from "./appSidebar.vue";
 export default {
   data() {
     return {
@@ -25,11 +26,12 @@ export default {
     };
   },
   components: {
-    questions
+    questions,
+    appSidebar
   },
   created() {
     axios
-      .get("api/question")
+      .get("/question")
       .then(res => (this.questions = res.data.data))
       .catch(errors => console.log(errors));
   }

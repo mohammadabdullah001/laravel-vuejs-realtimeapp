@@ -37,7 +37,7 @@ export default {
     },
     update() {
       axios
-        .patch(`/api/question/${this.question.slug}`, this.form)
+        .patch(`/question/${this.question.slug}`, this.form)
         .then(res => this.cancel())
         .catch(errors => console.log(errors));
     }

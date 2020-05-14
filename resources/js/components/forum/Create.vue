@@ -15,7 +15,7 @@
                 label="Category"
               ></v-select>
               <vue-simplemde v-model="form.body" />
-              <v-btn type="submit" color="green">Create</v-btn>
+              <v-btn type="submit" color="green" dark>Create</v-btn>
             </v-form>
           </v-card>
         </v-col>
@@ -38,14 +38,14 @@ export default {
   },
   created() {
     axios
-      .get("/api/category")
+      .get("/category")
       .then(res => (this.category = res.data.data))
       .catch(errors => console.log(errors));
   },
   methods: {
     create() {
       axios
-        .post("/api/question", this.form)
+        .post("/question", this.form)
         .then(res => this.$router.push(res.data.path))
         .catch(errors => console.log(errors));
     }

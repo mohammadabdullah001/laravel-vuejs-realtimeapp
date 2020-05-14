@@ -18,7 +18,7 @@ export default {
       navlinks: [
         { title: "FORUM", to: "/forum", show: true },
         { title: "ASK QUESTION", to: "/ask", show: User.loggedIn() },
-        { title: "CATEGORY", to: "/forum", show: User.loggedIn() },
+        { title: "CATEGORY", to: "/category", show: User.admin() },
         { title: "LOGIN", to: "/login", show: !User.loggedIn() },
         { title: "Logout", to: "/logout", show: User.loggedIn() }
       ]

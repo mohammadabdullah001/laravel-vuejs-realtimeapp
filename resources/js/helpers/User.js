@@ -4,7 +4,7 @@ import AppStorage from "./AppStorage";
 class User {
     login(data) {
         axios
-            .post("/api/auth/login", data)
+            .post("/auth/login", data)
             .then(res => this.responseAfterLogin(res))
             .catch(errors => {
                 console.log(errors);
@@ -54,6 +54,10 @@ class User {
 
     own(id) {
         return this.id() == id;
+    }
+
+    admin() {
+        return this.id() == 2;
     }
 }
 

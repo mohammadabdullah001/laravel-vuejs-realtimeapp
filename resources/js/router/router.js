@@ -8,6 +8,7 @@ import Signup from "../components/login/Signup.vue";
 import Forum from "../components/forum/Forum.vue";
 import Read from "../components/forum/Read.vue";
 import Create from "../components/forum/Create.vue";
+import CreateCategory from "../components/category/CreateCategory.vue";
 const routes = [
     { path: "/login", component: Login },
     { path: "/signup", component: Signup },
@@ -15,11 +16,12 @@ const routes = [
     { path: "/logout", component: Logout },
     { path: "/question/:slug", component: Read, name: "read" },
     { path: "/ask", component: Create },
+    { path: "/category", component: CreateCategory }
 ];
 
 const router = new VueRouter({
     routes,
-    mode: "history",
+    mode: "history"
 });
 
 export default router;
