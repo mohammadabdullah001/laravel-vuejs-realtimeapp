@@ -3,6 +3,8 @@
     <v-card-title>
       <div class="headline">{{data.user}}</div>
       <div class="ml-2">said {{data.created_at}}</div>
+      <v-spacer></v-spacer>
+      <like :counts="data"></like>
     </v-card-title>
     <v-divider></v-divider>
     <template v-if="edittingReply">
@@ -25,10 +27,12 @@
 
 <script>
 import editReply from "./editReply.vue";
+import like from "../likes/like.vue";
 export default {
   props: ["data", "index"],
   components: {
-    editReply
+    editReply,
+    like
   },
   data() {
     return {

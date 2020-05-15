@@ -3,6 +3,7 @@
     <v-toolbar-title>Bitfume</v-toolbar-title>
 
     <v-spacer></v-spacer>
+    <AppNotification v-if="loggedIn"></AppNotification>
     <div v-for="navlink in navlinks" :key="navlink.title">
       <router-link :to="navlink.to" v-if="navlink.show">
         <v-btn text>{{ navlink.title }}</v-btn>
@@ -12,9 +13,14 @@
 </template>
 
 <script>
+import AppNotification from "./AppNotification.vue";
 export default {
+  components: {
+    AppNotification
+  },
   data() {
     return {
+      loggedIn: User.loggedIn(),
       navlinks: [
         { title: "FORUM", to: "/forum", show: true },
         { title: "ASK QUESTION", to: "/ask", show: User.loggedIn() },
