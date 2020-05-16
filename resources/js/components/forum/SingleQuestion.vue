@@ -4,7 +4,7 @@
       <v-card-title>
         {{ question.title }}
         <v-spacer></v-spacer>
-        <v-btn color="success">{{ question.replies_count }} Replaye</v-btn>
+        <v-btn color="success">{{ replyCount }} Replaye</v-btn>
       </v-card-title>
       <v-card-subtitle class="grey--text">{{ question.user }} by {{ question.created_at }}</v-card-subtitle>
       <v-card-text v-html="body"></v-card-text>
@@ -25,13 +25,31 @@ export default {
   props: ["question"],
   data() {
     return {
-      own: User.own(this.question.user_id)
+      own: User.own(this.question.user_id),
+      replyCount: this.question.replies_count
     };
+  },
+  created() {
+    EventBuss.$on("newReply", () => {
+      this.replyCount++;
+    });
+    Echo.private("App.User." + User.id()).notification(notification => {
+      this.replyCount++;
+    });
+    EventBuss.$on("deleteReply", () => {
+      this.replyCount--;
+    });
+    Echo.channel("deleteReplyChannel").listen("DeleteReplyEvent", () => {
+      this.replyCount--;
+    });
   },
   computed: {
     body() {
       return md.parse(this.question.body);
     }
+    // replyCount() {
+    //   return this.question.replies_count;
+    // }
   },
   methods: {
     destroy() {

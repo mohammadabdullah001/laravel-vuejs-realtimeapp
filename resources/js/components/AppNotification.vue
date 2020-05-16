@@ -64,7 +64,7 @@ export default {
           this.unreads = res.data.unread;
           this.unreadCount = res.data.unread.length;
         })
-        .catch(errors => console.log(errors));
+        .catch(error => Exception.handle(error));
     },
     read(unread) {
       axios

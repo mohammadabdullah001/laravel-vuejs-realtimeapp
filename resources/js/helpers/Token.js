@@ -13,8 +13,20 @@ class Token {
         const payload = token.split(".")[1];
         return this.decode(payload);
     }
+
     decode(payload) {
-        return JSON.parse(atob(payload));
+        if (this.isBase64(payload)) {
+            return JSON.parse(atob(payload));
+        }
+        return false;
+    }
+
+    isBase64(str) {
+        try {
+            return btoa(atob(str)).replace(/=/g, "") == str;
+        } catch (err) {
+            return false;
+        }
     }
 }
 

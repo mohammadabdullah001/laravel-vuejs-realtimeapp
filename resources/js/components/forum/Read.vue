@@ -4,7 +4,12 @@
     <div v-else>
       <SingleQuestion v-if="question" :question="question" class="mt-2 mb-2"></SingleQuestion>
       <replies v-if="question" :question="question"></replies>
-      <createReply v-if="question" :questionSlug="question.slug"></createReply>
+      <div v-if="loggedIn">
+        <createReply v-if="question" :questionSlug="question.slug"></createReply>
+      </div>
+      <div v-else class="ml-12">
+        <router-link to="/login">Login to reply</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -30,6 +35,11 @@ export default {
   created() {
     this.listen();
     this.getQuestions();
+  },
+  computed: {
+    loggedIn() {
+      return User.loggedIn();
+    }
   },
   methods: {
     listen() {
