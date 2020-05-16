@@ -14,6 +14,13 @@ export default {
       count: this.counts.likes_count
     };
   },
+  created() {
+    Echo.channel("LikeChannel").listen("LikeEvent", e => {
+      if (this.counts.id == e.id) {
+        e.type == 1 ? this.count++ : this.count--;
+      }
+    });
+  },
   computed: {
     color() {
       return this.liked ? "red" : "red lighten-4";
