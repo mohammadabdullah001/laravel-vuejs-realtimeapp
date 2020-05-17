@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
+import paralax from "../components/paralax.vue";
 import Login from "../components/login/Login.vue";
 import Logout from "../components/login/Logout.vue";
 import Signup from "../components/login/Signup.vue";
@@ -10,6 +11,7 @@ import Read from "../components/forum/Read.vue";
 import Create from "../components/forum/Create.vue";
 import CreateCategory from "../components/category/CreateCategory.vue";
 const routes = [
+    { path: "/", component: paralax },
     { path: "/login", component: Login },
     { path: "/signup", component: Signup },
     { path: "/forum", component: Forum, name: "forum" },

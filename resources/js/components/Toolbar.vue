@@ -1,6 +1,8 @@
 <template>
   <v-toolbar dense>
-    <v-toolbar-title>Bitfume</v-toolbar-title>
+    <v-toolbar-title>
+      <router-link to="/">Bitfume</router-link>
+    </v-toolbar-title>
 
     <v-spacer></v-spacer>
     <AppNotification v-if="loggedIn"></AppNotification>
