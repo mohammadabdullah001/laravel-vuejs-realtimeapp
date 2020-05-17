@@ -2326,12 +2326,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      questions: {}
+      questions: {},
+      meta: {}
     };
   },
   components: {
@@ -2339,13 +2343,23 @@ __webpack_require__.r(__webpack_exports__);
     appSidebar: _appSidebar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {
-    var _this = this;
+    this.fetchQuestion();
+  },
+  methods: {
+    fetchQuestion: function fetchQuestion(page) {
+      var _this = this;
 
-    axios.get("/question").then(function (res) {
-      return _this.questions = res.data.data;
-    })["catch"](function (errors) {
-      return console.log(errors);
-    });
+      var url = page ? "/question?page=".concat(page) : "/question";
+      axios.get(url).then(function (res) {
+        _this.questions = res.data.data;
+        _this.meta = res.data.meta;
+      })["catch"](function (errors) {
+        return console.log(errors);
+      });
+    },
+    changePage: function changePage(page) {
+      this.fetchQuestion(page);
+    }
   }
 });
 
@@ -63011,14 +63025,35 @@ var render = function() {
           _c(
             "v-col",
             { attrs: { cols: "8" } },
-            _vm._l(_vm.questions, function(question) {
-              return _c("questions", {
-                key: question.id,
-                staticClass: "mb-2",
-                attrs: { question: question }
-              })
-            }),
-            1
+            [
+              _vm._l(_vm.questions, function(question) {
+                return _c("questions", {
+                  key: question.id,
+                  staticClass: "mb-2",
+                  attrs: { question: question }
+                })
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-center" },
+                [
+                  _c("v-pagination", {
+                    attrs: { length: _vm.meta.total },
+                    on: { input: _vm.changePage },
+                    model: {
+                      value: _vm.meta.current_page,
+                      callback: function($$v) {
+                        _vm.$set(_vm.meta, "current_page", $$v)
+                      },
+                      expression: "meta.current_page"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            2
           ),
           _vm._v(" "),
           _c("v-col", { attrs: { cols: "4" } }, [_c("appSidebar")], 1)
